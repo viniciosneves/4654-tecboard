@@ -4,12 +4,34 @@ import './App.css'
 
 // props é um OBJETO
 // props.children
-function TituloFormulario (props) {
+function TituloFormulario ({children}) {
   return (
     <h2>
-      {props.children}
+      {children}
     </h2>
   )
+}
+
+function CampoDeFormulario({ children }) {
+  return (
+    <fieldset>
+      {children}
+    </fieldset>
+  )
+}
+
+function Label({ children, htmlFor }) {
+// function Label(props) {
+  return (
+    <label htmlFor={htmlFor}>
+      {children}
+    </label>
+  )
+}
+
+function CampoDeEntrada(props) {
+
+  return <input {...props} />
 }
 
 function FormularioDeEvento () {
@@ -19,12 +41,17 @@ function FormularioDeEvento () {
       <TituloFormulario>
         Preencha para criar um evento:
       </TituloFormulario>
-      <fieldset>
-        <label htmlFor="nome">
+      <CampoDeFormulario>
+        <Label htmlFor="nome">
           Qual o nome do evento?
-        </label>
-        <input type="text" id='nome' placeholder='Summer dev hits' />
-      </fieldset>
+        </Label>
+        <CampoDeEntrada 
+          type="text" 
+          id='nome' 
+          placeholder='Summer dev hits' 
+          name='nomeEvento'
+        />
+      </CampoDeFormulario>
     </form>
   )
 }
