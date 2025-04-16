@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './App.css'
 import { Banner } from './componentes/Banner'
 import { CardEvento } from './componentes/CardEvento'
@@ -6,6 +7,7 @@ import { Tema } from './componentes/Tema'
 // no react, componentes são FUNÇÕES
 
 function App() {
+
 
   const temas = [
     {
@@ -34,18 +36,19 @@ function App() {
     },
   ]
 
-  const eventos = [
+  const [eventos, setEventos] = useState([
     {
       capa: 'https://raw.githubusercontent.com/viniciosneves/tecboard-assets/refs/heads/main/imagem_1.png',
       tema: temas[0],
       data: new Date(),
       titulo: 'Mulheres no Front'
     }
-  ]
+  ])
 
   function adicionarEvento(evento) {
-    eventos.push(evento)
-    console.log('eventos => ', eventos)
+    // eventos.push(evento)
+    // console.log('eventos => ', eventos)
+    setEventos([...eventos, evento])
   }
 
   return (
