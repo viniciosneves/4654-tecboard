@@ -50,7 +50,7 @@ function App() {
     // console.log('eventos => ', eventos)
     setEventos([...eventos, evento])
   }
-
+  // renderização condicional usando &&
   return (
     <main>
       <header>
@@ -62,14 +62,22 @@ function App() {
         aoSubmeter={adicionarEvento} 
       />
       <section className="container">
-        {temas.map(function (item) {
-          return (
-            <section key={item.id}>
-              <Tema tema={item} />
-              <div className="eventos">
-                {eventos.map(function (item, indice) {
+        {temas.map(function (tema) {
+          if (!eventos.some(function(evento) {
+            return evento.tema.id == tema.id
+          })) {
+            return null
+          }
 
-                  return <CardEvento evento={item} key={indice} />
+          return (
+            <section key={tema.id}>
+              <Tema tema={tema} />
+              <div className="eventos">
+                {eventos.filter(function (evento) {
+                    return evento.tema.id == tema.id
+                })
+                .map(function (evento, indice) {
+                  return <CardEvento evento={evento} key={indice} />
                 })}
               </div>
             </section>
